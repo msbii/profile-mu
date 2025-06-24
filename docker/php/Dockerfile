@@ -1,8 +1,9 @@
-FROM php:8.2-fpm
+FROM php:8.4-fpm
 
-# Install dependencies dan ekstensi PHP, termasuk ZIP
+# Install dependencies
 RUN apt-get update && apt-get install -y \
     git unzip zip curl libzip-dev libpng-dev libonig-dev libxml2-dev \
+    && docker-php-ext-configure zip \
     && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip
 
 # Install Composer
