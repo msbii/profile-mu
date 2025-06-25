@@ -5,7 +5,6 @@ services:
             dockerfile: docker/php/Dockerfile
         volumes:
             - ./:/var/www
-            - ./storage:/var/www/storage
         depends_on:
             - db
         networks:
