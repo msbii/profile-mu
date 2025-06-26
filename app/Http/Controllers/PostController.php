@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\post;
+use App\Models\Post;
 use App\Models\User;
 use App\Models\Kajian;
 use App\Models\Category;
