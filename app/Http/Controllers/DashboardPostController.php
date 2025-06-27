@@ -52,7 +52,7 @@ class DashboardPostController extends Controller
         ]);
         // check jika img tidak ada maka unsplash
         if ($request->file('image')) {
-            $validateData['image'] = $request->file('image')->store('post-images');
+            $validateData['image'] = $request->file('image')->store('public/post-images');
         }
 
         // Menyimpan data ke dalamm post
@@ -117,7 +117,7 @@ class DashboardPostController extends Controller
             if ($request->oldImage) {
                 Storage::delete($request->oldImage);
             }
-            $validateData['image'] = $request->file('image')->store('post-images');
+            $validateData['image'] = $request->file('image')->store('public/post-images');
         }
 
         // Menyimpan data ke dalamm post
