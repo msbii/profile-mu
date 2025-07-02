@@ -48,7 +48,7 @@
                         {!! $post->body !!}
                     </article>
 
-                    <iframe src="{{ asset('storage/post-document/' . $post->document) }}" 
+                    <iframe src="{{ asset('storage/app/public/post-document/' . $post->document) }}" 
                         width="100%" 
                         height="600px" 
                         style="border:none;">
