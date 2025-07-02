@@ -72,14 +72,11 @@ class DashboardKajianController extends Controller
         // $nama_document = basename($path);
 
         // Mengambil file dari request
-        if($request->file('document')){
-
+        if ($request->file('document')) {
             $document = $request->file('document');
-            // Mendapatkan nama asli file
-            $originalName = time() . '_' . $document->getClientOriginalName();
-            // Menyimpan file dengan nama asli ke folder 'post-document'
-            $path = $document->storeAs('post-document', $originalName);
-            $validateData['document'] = $originalName;
+            $originalName = time() . '_' . $document->getClientOriginalName(); // Nama asli file dengan timestamp
+            $path = $document->storeAs('post-document', $originalName, 'public'); // Simpan ke folder public
+            $validateData['document'] = $originalName; // Simpan nama file ke database
         }
 
         // $document = $request->file('document');
