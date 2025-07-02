@@ -153,12 +153,15 @@ class DashboardKajianController extends Controller
         }
 
         if ($request->file('document')) {
-            // Mengambil file dari request
+            // Hapus file lama jika ada
+            if ($kajian->document) {
+                Storage::disk('public')->delete('post-document/' . $kajian->document);
+            }
+
+            // Simpan file baru
             $document = $request->file('document');
-            // Mendapatkan nama asli file
             $originalName = time() . '_' . $document->getClientOriginalName();
-            // Menyimpan file dengan nama asli ke folder 'post-document'
-            $path = $document->storeAs('post-document', $originalName);
+            $path = $document->storeAs('post-document', $originalName, 'public');
             $validateData['document'] = $originalName;
         }
         
