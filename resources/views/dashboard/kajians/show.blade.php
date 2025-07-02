@@ -47,6 +47,12 @@
                     <article class="my-3">
                         {!! $post->body !!}
                     </article>
+
+                    <iframe src="{{ asset('storage/post-document/' . $post->document) }}" 
+                        width="100%" 
+                        height="600px" 
+                        style="border:none;">
+                    </iframe>
         
 
         </div>

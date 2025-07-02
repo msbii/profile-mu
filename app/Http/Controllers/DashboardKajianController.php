@@ -56,8 +56,11 @@ class DashboardKajianController extends Controller
             'document'=> 'mimes:doc,docx,pdf,xls,xlsx,ppt,pptx',
         ]);
         // check jika img tidak ada maka unsplash
+        // if ($request->file('image')) {
+        //     $validateData['image'] = $request->file('image')->store('post-images');
+        // }
         if ($request->file('image')) {
-            $validateData['image'] = $request->file('image')->store('post-images');
+            $validateData['image'] = $request->file('image')->store('post-images','public');
         }
 
         // // Mengambil file dari request
