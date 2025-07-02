@@ -7,6 +7,7 @@ use App\Models\KategoriSK;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class DashboardSKController extends Controller
 {
@@ -161,5 +162,12 @@ class DashboardSKController extends Controller
             "posts" => SK::latest()->filter(request(['search', 'kategori']))->paginate(7)->withQueryString(),//Load Digunakan N+1 Problem & pagination
             "pp" => $pp =null,
         ]);
+    }
+
+    // chekslug otomatis mengisi input slug
+    public function checkSlug(Request $request)
+    {
+        $slug = SlugService::createSlug(SK::class, 'slug', $request->title);
+        return response()->json(['slug' => $slug]);
     }
 }

@@ -75,7 +75,7 @@
     const slug = document.querySelector('#slug');
 
     title.addEventListener('change', function(){
-        fetch('/dashboard/posts/checkSlug?title=' + title.value) //kirim data
+        fetch('/dashboard/sk/checkSlug?title=' + title.value) //kirim data
         .then(response => response.json())
         .then(data => slug.value = data.slug) 
     });
