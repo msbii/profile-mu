@@ -55,12 +55,11 @@ class DashboardKajianController extends Controller
             'body' => 'required',
             'document'=> 'mimes:doc,docx,pdf,xls,xlsx,ppt,pptx',
         ]);
-        // check jika img tidak ada maka unsplash
-        // if ($request->file('image')) {
-        //     $validateData['image'] = $request->file('image')->store('post-images');
-        // }
+
         if ($request->file('image')) {
-            $validateData['image'] = $request->file('image')->store('post-images','public');
+            $path = $request->file('image')->store('public/post-images');
+            // Hapus 'public/' agar yang disimpan hanya 'post-images/namafile.png'
+            $validateData['image'] = str_replace('public/', '', $path);
         }
 
         // // Mengambil file dari request
@@ -79,12 +78,6 @@ class DashboardKajianController extends Controller
             $validateData['document'] = $originalName; // Simpan nama file ke database
         }
 
-        // $document = $request->file('document');
-        // // $nama_document = 'Kajian'.date('Ymdhis').'.'.$request->file('document')
-        // // ->getClientOriginalExtension();
-        // // Menambahkan timestamp untuk mencegah nama file duplikat
-        // $nama_document = time() . '_' . $document->getClientOriginalName();
-        // $document->move('dokumen/',$nama_document);
 
         // Menyimpan data ke dalamm post
         $validateData['user_id'] = auth()->user()->id;
@@ -142,14 +135,15 @@ class DashboardKajianController extends Controller
         // validasi data
         $validateData = $request->validate($rules);
 
-        
-        // check jika img tidak ada maka unsplash
         if ($request->file('image')) {
-            // Menghapus data foto lama supaya berganti baru
+            // Hapus gambar lama jika ada
             if ($request->oldImage) {
-                Storage::delete($request->oldImage);
+                Storage::delete('public/' . $request->oldImage);
             }
-            $validateData['image'] = $request->file('image')->store('post-images');
+
+            // Simpan file baru dan hanya simpan path tanpa 'public/'
+            $path = $request->file('image')->store('public/post-images');
+            $validateData['image'] = str_replace('public/', '', $path);
         }
 
         if ($request->file('document')) {
