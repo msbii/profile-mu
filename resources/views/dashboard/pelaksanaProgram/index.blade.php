@@ -69,9 +69,9 @@
                                     {{-- @if (Auth::check())
                                         @if (isset($pp)) --}}
                                         
-                                        @foreach ($posts as $post)
+                                        @foreach ($posts as $index => $post)
                                         <tr class="account__table--body__child">
-                                            <td class="account__table--body__child--items" id="counter">{{ $loop->iteration }}</td>
+                                            <td class="account__table--body__child--items" id="counter">{{ $posts->firstItem() + $index }}</td>
                                             <td class="cart__table--body__list">
                                                 <div class="cart__product d-flex align-items-center">
                                                     <div class="cart__thumbnail">
