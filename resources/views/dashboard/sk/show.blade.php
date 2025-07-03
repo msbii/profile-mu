@@ -26,11 +26,18 @@
                         </p>
                             <small class="text-muted">{{ $post->created_at->format('d M Y') }}</small>   
                     </div>
-                    <iframe src="{{ asset('storage/post-document/' . $post->document) }}" 
-                        width="100%" 
-                        height="600px" 
-                        style="border:none;">
-                    </iframe>
+                    @if ($post->document)
+                        <iframe 
+                            src="{{ asset('storage/post-document/' . $post->document) }}" 
+                            width="100%" 
+                            height="600px" 
+                            style="border: none;">
+                        </iframe>
+                    @else
+                        <div class="text-center text-gray-500 italic mt-4">
+                            Tidak ada dokumen yang tersedia.
+                        </div>
+                    @endif
         </div>
     
 @endsection

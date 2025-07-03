@@ -83,8 +83,8 @@
                                                 </div>
                                             </td>
                                             <td class="account__table--body__child--items">{{ Str::limit($post->title, 50) }}</td>
-                                            <td class="account__table--body__child--items">{!! $post->agenda !!}</td>
-                                            <td class="account__table--body__child--items">{!! $post->hasil !!}</td>
+                                            <td class="account__table--body__child--items">{!! Str::limit(strip_tags($post->agenda), 50, '...') !!}</td>
+                                            <td class="account__table--body__child--items">{!! Str::limit(strip_tags($post->hasil), 50, '...') !!}</td>
                                             <td class="account__table--body__child--items">{{ $post->location }}</td>
                                             <td class="account__table--body__child--items">
                                                 {{-- <button class="btn btn-warning btn-edit mx-1" data-id="{{ $item->id }}" data-toggle="modal" data-target="#editProductModal"> <i class="fas fa-edit"></i> Edit</button> --}}

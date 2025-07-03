@@ -60,7 +60,6 @@
                                             <th>Image</th>
                                             <th>Nama Bidang</th>
                                             <th>Nama Pelaksana</th>
-                                            <th>Deskripsi</th>
                                             <th>Lingkup</th>
                                             <th>Aksi</th>
 
@@ -84,8 +83,6 @@
                                             </td>
                                             <td class="account__table--body__child--items">{{ Str::limit($post->title, 50) }}</td>
                                             <td class="account__table--body__child--items">{{ $post->name }}</td>
-                                            {{-- <td class="account__table--body__child--items">{!! $post->description !!}</td> --}}
-                                            <td class="account__table--body__child--items">{!! Str::limit($post->description, 20) !!}</td>
                                             <td class="account__table--body__child--items">{{ $post->Lingkup->name }}</td>
                                             <td class="account__table--body__child--items">
                                                 {{-- <button class="btn btn-warning btn-edit mx-1" data-id="{{ $item->id }}" data-toggle="modal" data-target="#editProductModal"> <i class="fas fa-edit"></i> Edit</button> --}}
@@ -127,7 +124,6 @@
                                         <th>Image</th>
                                         <th>Nama Bidang</th>
                                         <th>Nama Pelaksana</th>
-                                        <th>Deskripsi</th>
                                         <th>Lingkup</th>
                                         <th>Aksi</th>
                                     </tfoot>
