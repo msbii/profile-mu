@@ -198,16 +198,13 @@ class DashboardKajianController extends Controller
 
     public function download($filename)
     {
-        $filePath = 'post-document/' . $filename;
+        $path = 'post-document/' . $filename;
 
-        // Memeriksa apakah file ada
-        if (Storage::exists($filePath)) {
-            // Mengunduh file
-            return Storage::download($filePath);
+        if (!Storage::disk('public')->exists($path)) {
+            abort(404, 'File tidak ditemukan');
         }
-        // Jika file tidak ada, kembalikan response 404 atau pesan error
-        return redirect()->back()->with('error', 'File tidak ditemukan.');
-    
+
+        return Storage::disk('public')->download($path);
     }
 
     public function search(Request $request)

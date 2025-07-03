@@ -153,18 +153,13 @@ class DashboardStrukturController extends Controller
 
     public function download($filename)
     {
-        $path = 'post-images/' . $filename; // Lokasi folder penyimpanan file
+        $path = $filename;
 
-        if (Storage::exists($path)) {
-            // Mengunduh file
-            // return Storage::disk('public')->download($path);
-            return Storage::download($path);
-        } else {
-            // Jika file tidak ditemukan
-            // abort(404, 'File not found');
-            // Jika file tidak ada, kembalikan response 404 atau pesan error
-            return redirect()->back()->with('error', 'File tidak ditemukan.');
+        if (!Storage::disk('public')->exists($path)) {
+            abort(404, 'File tidak ditemukan');
         }
+
+        return Storage::disk('public')->download($path);
     }
 
     public function search(Request $request)
