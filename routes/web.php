@@ -284,7 +284,7 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
     Route::get('/dashboard/struktur/checkSlug', [DashboardStrukturController::class,'checkSlug']);
     Route::resource('/dashboard/struktur', DashboardStrukturController::class);
 });
-Route::get('/download-image/{filename}', [DashboardController::class, 'downloadImage'])->name('downloadImage')
+Route::get('/download-image/{filename}', [DashboardStrukturController::class, 'downloadImage'])->name('downloadImage')
 ->where('filename', '.*'); // agar mendukung file dengan spasi dll;
 Route::get('/struktur/search', [DashboardStrukturController::class, 'search']);
 
