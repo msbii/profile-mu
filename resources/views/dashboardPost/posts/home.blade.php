@@ -467,6 +467,10 @@
                         </div>
                     </aside>
                 </div>
+
+                @foreach ($popularPosts as $post)
+    <p>{{ $loop->iteration }} — {{ $post->image ?? 'Tidak ada gambar' }}</p>
+@endforeach
                 
             </div>
             <hr>
