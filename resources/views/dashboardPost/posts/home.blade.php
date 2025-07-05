@@ -584,7 +584,7 @@
     </div>
 
         <!--Services Style One-->
-        <section class="services-style-one">
+        {{-- <section class="services-style-one">
         	<div class="auto-container">
             	<div class="row clearfix">
                 	
@@ -664,11 +664,11 @@
                 
                 <hr>
             </div>
-        </section>
+        </section> --}}
         
         
         <!--About Section-->
-        <section class="about-section">
+        {{-- <section class="about-section">
         	<div class="auto-container">
         		<div class="row clearfix">
                 	
@@ -824,11 +824,11 @@
                     
                 </div>
             </div>
-        </section>
+        </section> --}}
         
         
         <!--Two Column Fluid Section-->
-        <section class="two-column-fluid">
+        {{-- <section class="two-column-fluid">
 			<div class="auto-container">
                     
                 <div class="row clearfix">
@@ -924,7 +924,7 @@
                 
             </div>
                 
-        </section>
+        </section> --}}
 
         <!--Popular Post-->
         {{-- <section class="team-section">
