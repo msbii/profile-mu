@@ -459,7 +459,9 @@
                             
                             @foreach ($popularPosts as $post)
                                 <div class="post">
-                                    <div class="post-thumb"><a href="/posts/{{ $post->slug }}"><img src="{{ asset('storage/' . $post->image) }}" alt=""></a></div>
+                                    <div class="post-thumb"><a href="/posts/{{ $post->slug }}">
+                                        <img src="{{ $post->image ? asset('storage/' . $post->image) : 'https://via.placeholder.com/300x200?text=No+Image' }}">
+                                    </a></div>
                                     <h4><a href="/posts/{{ $post->slug }}">{{ $post->title }}</a></h4>
                                     <div class="post-info"><span class="icon flaticon-business"></span> {{ $post->created_at->format('d M y') }} </div>
                                 </div>
