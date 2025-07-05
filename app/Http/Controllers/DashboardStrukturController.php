@@ -151,7 +151,7 @@ class DashboardStrukturController extends Controller
         return redirect('/dashboard/struktur')->with('success', 'Data Struktur telah Dihapus!');
     }
 
-    public function download($filename)
+    public function downloadImage($filename)
     {
         $path = $filename;
 
