@@ -14,13 +14,37 @@ class DashboardPostController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function indexx()
     {
         $pp = null;
         // Menampilkan data berdasarkan user yang login
         return view('dashboard.posts.index',[
             'posts' => Post::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->paginate(10),
             'pp'=> $pp,
+        ]);
+    }
+
+    public function index()
+    {
+        $pp = null;
+
+        // Ambil user yang sedang login
+        $user = auth()->user();
+
+        // Cek apakah user adalah admin
+        if ($user->is_admin == 1) {
+            // Jika admin, tampilkan semua postingan
+            $posts = Post::orderBy('created_at', 'desc')->paginate(10);
+        } else {
+            // Jika bukan admin, tampilkan hanya postingan miliknya
+            $posts = Post::where('user_id', $user->id)
+                        ->orderBy('created_at', 'desc')
+                        ->paginate(10);
+        }
+
+        return view('dashboard.posts.index', [
+            'posts' => $posts,
+            'pp' => $pp,
         ]);
     }
 
