@@ -156,7 +156,7 @@
                                 {{ implode(' ', array_slice(explode(' ', auth()->user()->name), 0, 2)) }}
                             </a>
                             <ul class="dropdown-menu">
-                                @if ((auth()->user()->role == 'pengunjung'))
+                                @if ((auth()->user()->role == 'Pengunjung'))
                                     <li>
                                         @php
                                             // Cek apakah ada request yang statusnya 'pending' untuk user yang sedang login
