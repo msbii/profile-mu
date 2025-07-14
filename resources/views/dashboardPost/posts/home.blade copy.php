@@ -5,7 +5,296 @@
 
 
     <!--Main Slider-->
-    
+    <section class="main-slider revolution-slider">
+        
+        <div class="tp-banner-container">
+            <div class="tp-banner" data-paddingbottom="0">
+                <ul>
+                    {{-- @foreach($latestPosts as $post)
+                    <li data-transition="fade" data-slotamount="1" data-masterspeed="1000" data-thumb="{{ asset('storage/' . $post->image) }}" data-saveperformance="off" data-title="{{ $post->title }}">
+                        <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}" data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat"> 
+
+                        <div class="tp-caption sfl sfb tp-resizeme"
+                            data-x="right" data-hoffset="-15"
+                            data-y="center" data-voffset="-120"
+                            data-speed="1500"
+                            data-start="500"
+                            data-easing="easeOutExpo"
+                            data-splitin="none"
+                            data-splitout="none"
+                            data-elementdelay="0.01"
+                            data-endelementdelay="0.3"
+                            data-endspeed="1200"
+                            data-endeasing="Power4.easeIn"
+                            style="z-index: 4; max-width: 500px; max-height: auto; white-space: nowrap;">
+                            <h1 class="text-center">{{ $post->title }}</h1>
+                        </div>
+                        
+                        <div class="tp-caption sfr sfb tp-resizeme"
+                            data-x="right" data-hoffset="-80"
+                            data-y="center" data-voffset="20"
+                            data-speed="1500"
+                            data-start="1000"
+                            data-easing="easeOutExpo"
+                            data-splitin="none"
+                            data-splitout="none"
+                            data-elementdelay="0.01"
+                            data-endelementdelay="0.3"
+                            data-endspeed="1200"
+                            data-endeasing="Power4.easeIn"
+                            style="z-index: 4; max-width: 500px; max-height: auto; white-space: nowrap;">
+                            <div class="text text-center">{{ $post->excerpt }}</div>
+                        </div>
+                        
+                        <div class="tp-caption sfl sfb tp-resizeme"
+                            data-x="right" data-hoffset="-200"
+                            data-y="center" data-voffset="110"
+                            data-speed="1500"
+                            data-start="1500"
+                            data-easing="easeOutExpo"
+                            data-splitin="none"
+                            data-splitout="none"
+                            data-elementdelay="0.01"
+                            data-endelementdelay="0.3"
+                            data-endspeed="1200"
+                            data-endeasing="Power4.easeIn"
+                            style="z-index: 4; max-width: 500px; max-height: auto; white-space: nowrap;">
+                            <div class="text-center"><a href="/posts/{{ $post->slug }}" class="theme-btn btn-style-one">Baca Selengkapnya</a></div>
+                        </div>
+                    </li>
+                    @endforeach --}}
+
+                    
+                    {{-- <li data-transition="fade" data-slotamount="1" data-masterspeed="1000" data-thumb="images/main-slider/1.jpg"  data-saveperformance="off"  data-title="Awesome Title Here"> --}}
+                    <li data-transition="fade" data-slotamount="1" data-masterspeed="1000" data-thumb="images/main-slider/1.jpg" data-saveperformance="off" data-title="Awesome Title Here" style="max-width: 1200px; max-height: 600px; margin: auto;">
+
+                        {{-- pengecekan gambar kosong atau ada --}}
+                        @if ($popularPosts[1]->image)
+                            <img src="{{ asset('storage/' . $popularPosts[1]->image) }}"  alt=""  data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat"> 
+                        @else
+                            <img src="{{ asset('img') }}/Template1.jpg"  alt=""  data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat"> 
+                        @endif
+                    
+                    <div class="tp-caption sfl sfb tp-resizeme"
+                    data-x="right" data-hoffset="-15"
+                    data-y="center" data-voffset="-120"
+                    data-speed="1500"
+                    data-start="500"
+                    data-easing="easeOutExpo"
+                    data-splitin="none"
+                    data-splitout="none"
+                    data-elementdelay="0.01"
+                    data-endelementdelay="0.3"
+                    data-endspeed="1200"
+                    data-endeasing="Power4.easeIn"
+                    {{-- style="z-index: 4; max-width: 500px; max-height: auto; white-space: nowrap;"><h1 class="text-center">We Are Certified Family <br>Law Specialists</h1></div> --}}
+                    style="z-index: 4; max-width: 500px; max-height: auto; white-space: nowrap;"><h1 class="text-center">{{ $popularPosts[1]->title }}</h1></div>
+                    
+                    <div class="tp-caption sfr sfb tp-resizeme"
+                    data-x="right" data-hoffset="-80"
+                    data-y="center" data-voffset="20"
+                    data-speed="1500"
+                    data-start="1000"
+                    data-easing="easeOutExpo"
+                    data-splitin="none"
+                    data-splitout="none"
+                    data-elementdelay="0.01"
+                    data-endelementdelay="0.3"
+                    data-endspeed="1200"
+                    data-endeasing="Power4.easeIn"
+                    {{-- style="z-index: 4; max-width: 500px; max-height: auto; white-space: nowrap;"><div class="text text-center">We Have Helped Thousands of People to Get Relief From National Wide Fights <br>WrongfullDenials. Now They Trusted Our Attorneys.</div></div> --}}
+                    style="z-index: 4; max-width: 500px; max-height: auto; white-space: nowrap;"><div class="text text-center">{{ $popularPosts[1]->excerpt }}</div></div>
+                    
+                    <div class="tp-caption sfl sfb tp-resizeme"
+                    data-x="right" data-hoffset="-200"
+                    data-y="center" data-voffset="110"
+                    data-speed="1500"
+                    data-start="1500"
+                    data-easing="easeOutExpo"
+                    data-splitin="none"
+                    data-splitout="none"
+                    data-elementdelay="0.01"
+                    data-endelementdelay="0.3"
+                    data-endspeed="1200"
+                    data-endeasing="Power4.easeIn"
+                    {{-- style="z-index: 4; max-width: 500px; max-height: auto; white-space: nowrap;"><div class="text-center"><a href="#" class="theme-btn btn-style-one">Contact Our Attorneys</a></div></div> --}}
+                    style="z-index: 4; max-width: 500px; max-height: auto; white-space: nowrap;"><div class="text-center"><a href="/posts/{{ $popularPosts[1]->slug }}" class="theme-btn btn-style-one">Lihat Postingan</a></div></div>
+                    
+                    <div class="tp-caption sfr sfb tp-resizeme"
+                    data-x="right" data-hoffset="-200"
+                    data-y="center" data-voffset="180"
+                    data-speed="1500"
+                    data-start="2000"
+                    data-easing="easeOutExpo"
+                    data-splitin="none"
+                    data-splitout="none"
+                    data-elementdelay="0.01"
+                    data-endelementdelay="0.3"
+                    data-endspeed="1200"
+                    data-endeasing="Power4.easeIn"
+                    style="z-index: 4; max-width: 500px; max-height: auto; white-space: nowrap;"><div class="text-center"><a href="/posts/{{ $popularPosts[1]->slug }}" class="normal-link"><span class="icon flaticon-circle-5"></span> Lihat Postingan</a></div></div>
+                    
+                    </li>
+                    
+                    
+                    {{-- <li data-transition="fade" data-slotamount="1" data-masterspeed="1000" data-thumb="images/main-slider/2.jpg"  data-saveperformance="off"  data-title="Awesome Title Here"> --}}
+                    <li data-transition="fade" data-slotamount="1" data-masterspeed="1000" data-thumb="images/main-slider/2.jpg" data-saveperformance="off" data-title="Awesome Title Here" style="max-width: 1200px; max-height: 600px; margin: auto;">
+                        {{-- pengecekan gambar kosong atau ada --}}
+                    @if ($popularPosts[1]->image)
+                        <img src="{{ asset('storage/' . $popularPosts[2]->image) }}"  alt=""  data-bgposition="left top" data-bgfit="cover" data-bgrepeat="no-repeat">
+                    @else
+                        <img src="{{ asset('img') }}/Template2.jpg"  alt=""  data-bgposition="left top" data-bgfit="cover" data-bgrepeat="no-repeat"> 
+                    @endif
+
+                    <div class="tp-caption sfl sfb tp-resizeme"
+                    data-x="left" data-hoffset="-270"
+                    data-y="bottom" data-voffset="30"
+                    data-speed="1500"
+                    data-start="500"
+                    data-easing="easeOutExpo"
+                    data-splitin="none"
+                    data-splitout="none"
+                    data-elementdelay="0.01"
+                    data-endelementdelay="0.3"
+                    data-endspeed="1200"
+                    data-endeasing="Power4.easeIn"
+                    style="z-index: 4; max-width: 500px; max-height: auto; white-space: nowrap;"><div class="logo-image"><img src="" alt=""></div></div>
+                    
+                    <div class="tp-caption sfr sfb tp-resizeme"
+                    data-x="center" data-hoffset="0"
+                    data-y="center" data-voffset="-140"
+                    data-speed="1500"
+                    data-start="1000"
+                    data-easing="easeOutExpo"
+                    data-splitin="none"
+                    data-splitout="none"
+                    data-elementdelay="0.01"
+                    data-endelementdelay="0.3"
+                    data-endspeed="1200"
+                    data-endeasing="Power4.easeIn"
+                    {{-- style="z-index: 4; max-width: 500px; max-height: auto; white-space: nowrap;"><div class="logo-image"><img src="{{ asset('lawyerPack') }}/images/resource/central-logo.png" alt=""></div></div> --}}
+                    style="z-index: 4; max-width: 500px; max-height: auto; white-space: nowrap;"><div class="logo-image"><img src="" alt=""></div></div>
+                    
+                    <div class="tp-caption sfl sfb tp-resizeme"
+                    data-x="center" data-hoffset="0"
+                    data-y="center" data-voffset="0"
+                    data-speed="1500"
+                    data-start="1000"
+                    data-easing="easeOutExpo"
+                    data-splitin="none"
+                    data-splitout="none"
+                    data-elementdelay="0.01"
+                    data-endelementdelay="0.3"
+                    data-endspeed="1200"
+                    data-endeasing="Power4.easeIn"
+                    {{-- style="z-index: 4; max-width: 500px; max-height: auto; white-space: nowrap;"><h1 class="text-center">Senior Defence Lawyer <br>L.K. Antony</h1></div> --}}
+                    style="z-index: 4; max-width: 500px; max-height: auto; white-space: nowrap;"><h1 class="text-center">{{ $popularPosts[2]->title }}</h1></div>
+                    
+                    <div class="tp-caption sfr sfb tp-resizeme"
+                    data-x="center" data-hoffset="0"
+                    data-y="center" data-voffset="110"
+                    data-speed="1500"
+                    data-start="1000"
+                    data-easing="easeOutExpo"
+                    data-splitin="none"
+                    data-splitout="none"
+                    data-elementdelay="0.01"
+                    data-endelementdelay="0.3"
+                    data-endspeed="1200"
+                    data-endeasing="Power4.easeIn"
+                    style="z-index: 4; max-width: 500px; max-height: auto; white-space: nowrap;"><div class="phone-no">{{ $popularPosts[2]->except }}</div></div>
+                    
+                    <div class="tp-caption sfl sfb tp-resizeme"
+                    data-x="center" data-hoffset="0"
+                    data-y="center" data-voffset="180"
+                    data-speed="1500"
+                    data-start="1000"
+                    data-easing="easeOutExpo"
+                    data-splitin="none"
+                    data-splitout="none"
+                    data-elementdelay="0.01"
+                    data-endelementdelay="0.3"
+                    data-endspeed="1200"
+                    data-endeasing="Power4.easeIn"
+                    style="z-index: 4; max-width: 500px; max-height: auto; white-space: nowrap;"><div class="text-center"><a href="/posts/{{ $popularPosts[2]->slug }}" class="theme-btn btn-style-one">Lihat Postingan</a></div></div>
+                                       
+                    </li>
+                    
+                    
+                    {{-- <li data-transition="fade" data-slotamount="1" data-masterspeed="1000" data-thumb="images/main-slider/3.jpg"  data-saveperformance="off"  data-title="Awesome Title Here"> --}}
+                    <li data-transition="fade" data-slotamount="1" data-masterspeed="1000" data-thumb="images/main-slider/3.jpg" data-saveperformance="off" data-title="Awesome Title Here" style="max-width: 1200px; max-height: 600px; margin: auto;">
+                        {{-- pengecekan gambar kosong atau ada --}}
+                    @if ($popularPosts[1]->image)
+                        <img src="{{ asset('storage/' . $popularPosts[3]->image) }}"  alt=""  data-bgposition="right top" data-bgfit="cover" data-bgrepeat="no-repeat"> 
+                    @else
+                        <img src="{{ asset('img') }}/Template3.jpg"  alt=""  data-bgposition="right top" data-bgfit="cover" data-bgrepeat="no-repeat"> 
+                    @endif
+                    
+                    <div class="tp-caption sfl sfb tp-resizeme"
+                    data-x="left" data-hoffset="15"
+                    data-y="center" data-voffset="-150"
+                    data-speed="1500"
+                    data-start="500"
+                    data-easing="easeOutExpo"
+                    data-splitin="none"
+                    data-splitout="none"
+                    data-elementdelay="0.01"
+                    data-endelementdelay="0.3"
+                    data-endspeed="1200"
+                    data-endeasing="Power4.easeIn"
+                    style="z-index: 4; max-width: 500px; max-height: auto; white-space: nowrap;"><div class="smaller-title">{{ $popularPosts[3]->title }}</div></div>
+                    
+                    <div class="tp-caption sfl sfb tp-resizeme"
+                    data-x="left" data-hoffset="15"
+                    data-y="center" data-voffset="-50"
+                    data-speed="1500"
+                    data-start="1000"
+                    data-easing="easeOutExpo"
+                    data-splitin="none"
+                    data-splitout="none"
+                    data-elementdelay="0.01"
+                    data-endelementdelay="0.3"
+                    data-endspeed="1200"
+                    data-endeasing="Power4.easeIn"
+                    {{-- style="z-index: 4; max-width: 500px; max-height: auto; white-space: nowrap;"><h1 class="text-left">Attrorneys Fighting For <br>Your Freedom</h1></div> --}}
+                    {{-- style="z-index: 4; max-width: 500px; max-height: auto; white-space: nowrap;"><h1 class="text-left">{{ $popularPosts[3]->title }}</h1></div> --}}
+                    
+                    <div class="tp-caption sfl sfb tp-resizeme"
+                    data-x="left" data-hoffset="15"
+                    data-y="center" data-voffset="60"
+                    data-speed="1500"
+                    data-start="1500"
+                    data-easing="easeOutExpo"
+                    data-splitin="none"
+                    data-splitout="none"
+                    data-elementdelay="0.01"
+                    data-endelementdelay="0.3"
+                    data-endspeed="1200"
+                    data-endeasing="Power4.easeIn"
+                    {{-- style="z-index: 4; max-width: 500px; max-height: auto; white-space: nowrap;"><div class="text">We Have Helped Thousands of People to Get Relief From National Wide Fights <br>WrongfullDenials. Now They Trusted Our Attorneys.</div></div> --}}
+                    style="z-index: 4; max-width: 500px; max-height: auto; white-space: nowrap;"><div class="text">{{ $popularPosts[3]->excerpt }}</div></div>
+                    
+                    <div class="tp-caption sfl sfb tp-resizeme"
+                    data-x="left" data-hoffset="15"
+                    data-y="center" data-voffset="150"
+                    data-speed="1500"
+                    data-start="2000"
+                    data-easing="easeOutExpo"
+                    data-splitin="none"
+                    data-splitout="none"
+                    data-elementdelay="0.01"
+                    data-endelementdelay="0.3"
+                    data-endspeed="1200"
+                    data-endeasing="Power4.easeIn"
+                    style="z-index: 4; max-width: 500px; max-height: auto; white-space: nowrap;"><div class="text-center"><a href="/posts/{{ $popularPosts[3]->slug }}" class="theme-btn btn-style-one">Lihat Postingan</a></div></div>
+                    
+                    </li>
+                                   
+                </ul>
+                
+            </div>
+        </div>
+    </section>
 </div>
 
       
