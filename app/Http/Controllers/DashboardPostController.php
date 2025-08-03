@@ -75,16 +75,16 @@ class DashboardPostController extends Controller
             'body' => 'required'
         ]);
         // check jika img tidak ada maka unsplash
-        // if ($request->file('image')) {
-        //     $validateData['image'] = $request->file('image')->store('public/post-images');
-        // }
+        if ($request->file('image')) {
+            $validateData['image'] = $request->file('image')->store('public/post-images');
+        }
 
         // Simpan file gambar
-        if ($request->file('image')) {
-            $path = $request->file('image')->store('public/post-images');
-            // Hapus 'public/' agar yang disimpan hanya 'post-images/namafile.png'
-            $validateData['image'] = str_replace('public/', '', $path);
-        }
+        // if ($request->file('image')) {
+        //     $path = $request->file('image')->store('public/post-images');
+        //     // Hapus 'public/' agar yang disimpan hanya 'post-images/namafile.png'
+        //     $validateData['image'] = str_replace('public/', '', $path);
+        // }
 
         // Menyimpan data ke dalamm post
         $validateData['user_id'] = auth()->user()->id;
@@ -143,24 +143,24 @@ class DashboardPostController extends Controller
 
         
         // check jika img tidak ada maka unsplash
-        // if ($request->file('image')) {
-        //     // Menghapus data foto lama supaya berganti baru
-        //     if ($request->oldImage) {
-        //         Storage::delete($request->oldImage);
-        //     }
-        //     $validateData['image'] = $request->file('image')->store('public/post-images');
-        // }
-
         if ($request->file('image')) {
-            // Hapus gambar lama jika ada
+            // Menghapus data foto lama supaya berganti baru
             if ($request->oldImage) {
-                Storage::delete('public/' . $request->oldImage);
+                Storage::delete($request->oldImage);
             }
-
-            // Simpan file baru dan hanya simpan path tanpa 'public/'
-            $path = $request->file('image')->store('public/post-images');
-            $validateData['image'] = str_replace('public/', '', $path);
+            $validateData['image'] = $request->file('image')->store('public/post-images');
         }
+
+        // if ($request->file('image')) {
+        //     // Hapus gambar lama jika ada
+        //     if ($request->oldImage) {
+        //         Storage::delete('public/' . $request->oldImage);
+        //     }
+
+        //     // Simpan file baru dan hanya simpan path tanpa 'public/'
+        //     $path = $request->file('image')->store('public/post-images');
+        //     $validateData['image'] = str_replace('public/', '', $path);
+        // }
 
         // Menyimpan data ke dalamm post
         $validateData['user_id'] = auth()->user()->id;
