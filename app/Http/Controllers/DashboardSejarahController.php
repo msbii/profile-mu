@@ -50,9 +50,7 @@ class DashboardSejarahController extends Controller
 
         // Simpan file gambar
         if ($request->file('image')) {
-            $path = $request->file('image')->store('public/post-images');
-            // Hapus 'public/' agar yang disimpan hanya 'post-images/namafile.png'
-            $validateData['image'] = str_replace('public/', '', $path);
+            $validateData['image'] = $request->file('image')->store('post-images','public');
         }
 
         // Menyimpan data ke dalamm post
@@ -103,16 +101,12 @@ class DashboardSejarahController extends Controller
         $validateData = $request->validate($rules);
 
         if ($request->file('image')) {
-            // Hapus gambar lama jika ada
+            // Menghapus data foto lama supaya berganti baru
             if ($request->oldImage) {
-                Storage::delete('public/' . $request->oldImage);
+                Storage::delete($request->oldImage);
             }
-
-            // Simpan file baru dan hanya simpan path tanpa 'public/'
-            $path = $request->file('image')->store('public/post-images');
-            $validateData['image'] = str_replace('public/', '', $path);
+            $validateData['image'] = $request->file('image')->store('post-images','public');
         }
-
         // Menyimpan data ke dalamm post
         $validateData['user_id'] = auth()->user()->id;
         $validateData['excerpt'] = Str::limit(strip_tags($request->body), 200);

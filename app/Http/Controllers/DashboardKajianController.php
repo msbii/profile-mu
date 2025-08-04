@@ -57,18 +57,9 @@ class DashboardKajianController extends Controller
         ]);
 
         if ($request->file('image')) {
-            $path = $request->file('image')->store('public/post-images');
-            // Hapus 'public/' agar yang disimpan hanya 'post-images/namafile.png'
-            $validateData['image'] = str_replace('public/', '', $path);
+            $validateData['image'] = $request->file('image')->store('post-images','public');
         }
 
-        // // Mengambil file dari request
-        // $document = $request->file('document');
-        // // Menyimpan file ke folder 'post-document' dalam penyimpanan default Laravel ('storage/app/post-document')
-        // $path = $document->store('post-document');
-        // // $path akan berisi path relatif ke penyimpanan, misalnya "post-document/nama_file_unik.pdf"
-        // // Jika Anda perlu mendapatkan nama file untuk disimpan di database atau menampilkan file, gunakan basename()
-        // $nama_document = basename($path);
 
         // Mengambil file dari request
         if ($request->file('document')) {
@@ -136,14 +127,11 @@ class DashboardKajianController extends Controller
         $validateData = $request->validate($rules);
 
         if ($request->file('image')) {
-            // Hapus gambar lama jika ada
+            // Menghapus data foto lama supaya berganti baru
             if ($request->oldImage) {
-                Storage::delete('public/' . $request->oldImage);
+                Storage::delete($request->oldImage);
             }
-
-            // Simpan file baru dan hanya simpan path tanpa 'public/'
-            $path = $request->file('image')->store('public/post-images');
-            $validateData['image'] = str_replace('public/', '', $path);
+            $validateData['image'] = $request->file('image')->store('post-images','public');
         }
 
         if ($request->file('document')) {
