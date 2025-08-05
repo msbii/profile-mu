@@ -83,7 +83,9 @@
                                                 </div>
                                             </td>
                                             <td class="account__table--body__child--items">{{ Str::limit($post->title, 50) }}</td>
-                                            <td class="account__table--body__child--items">{!! $post->description !!}</td>
+                                            <td class="account__table--body__child--items">
+                                                {{ Str::limit(strip_tags($post->description), 50, '') }}
+                                            </td>
                                             <td class="account__table--body__child--items">{{ $post->quantity }}</td>
                                             <td class="account__table--body__child--items">{{ $post->location }}</td>
                                             <td class="account__table--body__child--items">
