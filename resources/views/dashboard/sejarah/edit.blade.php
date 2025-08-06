@@ -12,6 +12,10 @@
         @method('put')
         @csrf
 
+        <div>
+          <h2>{{ $post->title }}</h2>
+        </div>
+
         {{-- foto --}}
         <div class="mb-3">
           <label for="image" class="form-label">Gambar</label>
