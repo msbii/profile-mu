@@ -53,7 +53,7 @@
                                     Agenda: {!! $musyawarah->agenda !!}
                                 </div>
                                 <div class="text">
-                                    Hasil Musyawarah: {!! $musyawarah->Hasil !!}
+                                    Hasil Musyawarah: {!! $musyawarah->hasil !!}
                                 </div>
                             </div>
 
