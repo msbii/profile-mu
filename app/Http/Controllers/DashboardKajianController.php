@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\KategoriKajian;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Response;
+use Intervention\Image\Laravel\Facades\Image;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class DashboardKajianController extends Controller
@@ -56,8 +57,35 @@ class DashboardKajianController extends Controller
             'document'=> 'mimes:doc,docx,pdf,xls,xlsx,ppt,pptx',
         ]);
 
-        if ($request->file('image')) {
-            $validateData['image'] = $request->file('image')->store('post-images','public');
+        // if ($request->file('image')) {
+        //     $validateData['image'] = $request->file('image')->store('post-images','public');
+        // }
+
+        if ($request->hasFile('image')) {
+            // Simpan original
+            $originalPath = $request->file('image')->store('post-images/original', 'public');
+            $filename = basename($originalPath);
+
+            // Path thumbnail
+            $thumbnailPath = 'post-images/thumbnail/' . $filename;
+            $thumbnailFullPath = storage_path('app/public/' . $thumbnailPath);
+
+            // Pastikan folder ada
+            if (!file_exists(dirname($thumbnailFullPath))) {
+                mkdir(dirname($thumbnailFullPath), 0777, true);
+            }
+
+            // Resize dengan Intervention Image v3
+            $thumbnail = Image::read($request->file('image'))
+                ->cover(370, 250); // crop & resize agar pas
+
+            $thumbnail->save($thumbnailFullPath);
+
+            // Simpan path relatif ke database (bisa pilih salah satu: original atau thumbnail)
+            $validateData['image'] = $originalPath;
+        } else {
+            // Jika tidak ada gambar, bisa kasih default
+            $validateData['image'] = null;
         }
 
 
@@ -126,12 +154,41 @@ class DashboardKajianController extends Controller
         // validasi data
         $validateData = $request->validate($rules);
 
+        // if ($request->file('image')) {
+        //     // Menghapus data foto lama supaya berganti baru
+        //     if ($request->oldImage) {
+        //         Storage::delete($request->oldImage);
+        //     }
+        //     $validateData['image'] = $request->file('image')->store('post-images','public');
+        // }
+
         if ($request->file('image')) {
-            // Menghapus data foto lama supaya berganti baru
+            // Hapus gambar lama (original + thumbnail)
             if ($request->oldImage) {
-                Storage::delete($request->oldImage);
+                Storage::disk('public')->delete('post-images/original/' . $request->oldImage);
+                Storage::disk('public')->delete('post-images/thumbnail/' . $request->oldImage);
             }
-            $validateData['image'] = $request->file('image')->store('post-images','public');
+
+            // Simpan gambar original
+            $originalPath = $request->file('image')->store('post-images/original', 'public');
+            $filename = basename($originalPath);
+
+            // Buat thumbnail
+            $thumbnailPath = 'post-images/thumbnail/' . $filename;
+            $thumbnailFullPath = storage_path('app/public/' . $thumbnailPath);
+
+            if (!file_exists(dirname($thumbnailFullPath))) {
+                mkdir(dirname($thumbnailFullPath), 0777, true);
+            }
+
+            $image = Image::read($request->file('image'))
+                ->cover(370, 250); // crop + resize
+            $image->save($thumbnailFullPath);
+
+            // Simpan nama file saja (atau path tergantung pilihan sebelumnya)
+            $validatedData['image'] = $filename;
+        } else {
+            $validatedData['image'] = $request->oldImage;
         }
 
         if ($request->file('document')) {

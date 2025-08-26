@@ -52,7 +52,7 @@
                                         {{-- pengecekan gambar kosong atau ada --}}
                                         @if ($post->image)
                                             {{-- <img src="{{ asset('storage/' . $post->image) }}" width="370" height="250" class="card-img-top" alt="{{ $post->title }}"> --}}
-                                            <img src="{{ asset('storage/post-images/thumbnail/'.basename($post->image)) }}" alt="">
+                                            <img src="{{ asset('storage/post-images/thumbnail/'.basename($post->image)) }}" class="card-img-top" alt="">
 
                                         @else
                                             {{-- <img src="https://storage.googleapis.com/a1aa/image/fYtaLxmXcWwZE6OgwpSCiZjC55SLkvIj3QQshe5WZGwAookTA.jpg" width="370" height="250" class="card-img-top" alt="{{ $kajian[0]->title }}"> --}}
@@ -122,7 +122,8 @@
                                             <figure class="image-box">
                                                 {{-- pengecekan gambar kosong atau ada --}}
                                                 @if ($post->image)
-                                                    <img src="{{ asset('storage/' . $post->image) }}" width="370" height="100" class="card-img-top" alt="{{ $post->title }}">
+                                                    {{-- <img src="{{ asset('storage/' . $post->image) }}" width="370" height="100" class="card-img-top" alt="{{ $post->title }}"> --}}
+                                                    <img src="{{ asset('storage/post-images/thumbnail/'.basename($post->image)) }}"  alt="">
                                                 @else
                                                     <img src="https://storage.googleapis.com/a1aa/image/fYtaLxmXcWwZE6OgwpSCiZjC55SLkvIj3QQshe5WZGwAookTA.jpg" width="370" height="100" class="card-img-top" alt="{{ $post->title }}">
                                                 @endif
@@ -173,7 +174,8 @@
                             @foreach ($popularPosts as $post)
                                 <div class="post">
                                     <div class="post-thumb"><a href="/posts/{{ $post->slug }}">
-                                        <img src="{{ $post->image ? asset('storage/' . $post->image) : 'https://via.placeholder.com/300x200?text=No+Image' }}">
+                                        {{-- <img src="{{ $post->image ? asset('storage/' . $post->image) : 'https://via.placeholder.com/300x200?text=No+Image' }}"> --}}
+                                        <img src="{{ $post->image ? asset('storage/post-images/thumbnail/'.basename($post->image)) : 'https://via.placeholder.com/300x200?text=No+Image' }}">
                                     </a></div>
                                     <h4><a href="/posts/{{ $post->slug }}">{{ $post->title }}</a></h4>
                                     <div class="post-info"><span class="icon flaticon-business"></span> {{ $post->created_at->format('d M y') }} </div>
@@ -205,7 +207,8 @@
                                     <figure class="image-box">
                                         {{-- Pengecekan gambar kosong atau ada --}}
                                         @if ($post->image)
-                                            <img src="{{ asset('storage/' . $post->image) }}" class="image" alt="{{ $post->title }}">
+                                            {{-- <img src="{{ asset('storage/' . $post->image) }}" class="image" alt="{{ $post->title }}"> --}}
+                                            <img src="{{ asset('storage/post-images/thumbnail/'.basename($post->image)) }}" class="image" alt="">
                                         @else
                                             <img src="https://images.unsplash.com/photo-1417325384643-aac51acc9e5d?q=75&fm=jpg&w=1080&fit=max" class="image" alt="{{ $post->title }}">
                                         @endif
@@ -239,7 +242,8 @@
                                     <figure class="image-box">
                                         {{-- Pengecekan gambar kosong atau ada --}}
                                         @if ($post->image)
-                                            <img src="{{ asset('storage/' . $post->image) }}" class="image" alt="{{ $post->title }}">
+                                            {{-- <img src="{{ asset('storage/' . $post->image) }}" class="image" alt="{{ $post->title }}"> --}}
+                                            <img src="{{ asset('storage/post-images/thumbnail/'.basename($post->image)) }}" class="image" alt="">
                                         @else
                                             <img src="https://images.unsplash.com/photo-1417325384643-aac51acc9e5d?q=75&fm=jpg&w=1080&fit=max" class="image" alt="{{ $post->title }}">
                                         @endif
@@ -273,7 +277,8 @@
                                     <figure class="image-box">
                                         {{-- Pengecekan gambar kosong atau ada --}}
                                         @if ($post->image)
-                                            <img src="{{ asset('storage/' . $post->image) }}" class="image" alt="{{ $post->title }}">
+                                            {{-- <img src="{{ asset('storage/' . $post->image) }}" class="image" alt="{{ $post->title }}"> --}}
+                                            <img src="{{ asset('storage/post-images/thumbnail/'.basename($post->image)) }}" class="image" alt="">
                                         @else
                                             <img src="https://images.unsplash.com/photo-1417325384643-aac51acc9e5d?q=75&fm=jpg&w=1080&fit=max" class="image" alt="{{ $post->title }}">
                                         @endif

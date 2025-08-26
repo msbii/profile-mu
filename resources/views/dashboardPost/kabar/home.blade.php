@@ -42,7 +42,8 @@
                                                             <figure class="image-box">
                                                                 {{-- pengecekan gambar kosong atau ada --}}
                                                                 @if ($post->image)
-                                                                    <img src="{{ asset('storage/' . $post->image) }}" width="370" height="100" class="card-img-top" alt="{{ $post->title }}">
+                                                                    {{-- <img src="{{ asset('storage/' . $post->image) }}" width="370" height="100" class="card-img-top" alt="{{ $post->title }}"> --}}
+                                                                    <img src="{{ asset('storage/post-images/thumbnail/'.basename($post->image)) }}" class="card-img-top" alt="">
                                                                 @else
                                                                     <img src="https://storage.googleapis.com/a1aa/image/fYtaLxmXcWwZE6OgwpSCiZjC55SLkvIj3QQshe5WZGwAookTA.jpg" width="370" height="327" class="card-img-top" alt="{{ $post->title }}">
                                                                 @endif
@@ -122,7 +123,10 @@
                                         
                                         @foreach ($latesPosts as $post)
                                             <div class="post">
-                                                <div class="post-thumb"><a href="/posts/{{ $post->slug }}"><img src="{{ asset('storage/' . $post->image) }}" alt=""></a></div>
+                                                <div class="post-thumb"><a href="/posts/{{ $post->slug }}">
+                                                    <img src="{{ asset('storage/post-images/thumbnail/'.basename($post->image)) }}" alt="">
+                                                </a>
+                                                </div>
                                                 <h4><a href="/posts/{{ $post->slug }}">{{ $post->title }}</a></h4>
                                                 <div class="post-info"><span class="icon flaticon-business"></span> {{ $post->created_at->format('d M y') }} </div>
                                             </div>

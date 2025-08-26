@@ -91,7 +91,7 @@ class DashboardPostController extends Controller
 
             // Resize dengan Intervention Image v3
             $thumbnail = Image::read($request->file('image'))
-                ->cover(300, 300); // crop & resize agar pas
+                ->cover(370, 250); // crop & resize agar pas
 
             $thumbnail->save($thumbnailFullPath);
 
@@ -213,12 +213,41 @@ class DashboardPostController extends Controller
 
         
         // check jika img tidak ada maka unsplash
+        // if ($request->file('image')) {
+        //     // Menghapus data foto lama supaya berganti baru
+        //     if ($request->oldImage) {
+        //         Storage::delete($request->oldImage);
+        //     }
+        //     $validateData['image'] = $request->file('image')->store('post-images','public');
+        // }
+
         if ($request->file('image')) {
-            // Menghapus data foto lama supaya berganti baru
+            // Hapus gambar lama (original + thumbnail)
             if ($request->oldImage) {
-                Storage::delete($request->oldImage);
+                Storage::disk('public')->delete('post-images/original/' . $request->oldImage);
+                Storage::disk('public')->delete('post-images/thumbnail/' . $request->oldImage);
             }
-            $validateData['image'] = $request->file('image')->store('post-images','public');
+
+            // Simpan gambar original
+            $originalPath = $request->file('image')->store('post-images/original', 'public');
+            $filename = basename($originalPath);
+
+            // Buat thumbnail
+            $thumbnailPath = 'post-images/thumbnail/' . $filename;
+            $thumbnailFullPath = storage_path('app/public/' . $thumbnailPath);
+
+            if (!file_exists(dirname($thumbnailFullPath))) {
+                mkdir(dirname($thumbnailFullPath), 0777, true);
+            }
+
+            $image = Image::read($request->file('image'))
+                ->cover(370, 250); // crop + resize
+            $image->save($thumbnailFullPath);
+
+            // Simpan nama file saja (atau path tergantung pilihan sebelumnya)
+            $validatedData['image'] = $filename;
+        } else {
+            $validatedData['image'] = $request->oldImage;
         }
 
         // if ($request->file('image')) {

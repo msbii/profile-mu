@@ -42,7 +42,7 @@
                                         @if ($post->image)
                                             <div class="d-flex justify-content-center">
                                                 {{-- <img src="{{ asset('storage/' . $post->image) }}" width="750" height="450" class="img-fluid" alt="{{ $post->category->name }}"> --}}
-                                                <img src="{{ asset('storage/'.$post->image) }}" alt="">
+                                                <img src="{{ asset('storage/post-images/original/'.$post->image) }}" width="750" height="450" class="img-fluid" alt="">
 
                                             </div>
                                         @else
