@@ -245,7 +245,8 @@ class DashboardPostController extends Controller
             $image->save($thumbnailFullPath);
 
             // Simpan nama file saja (atau path tergantung pilihan sebelumnya)
-            $validatedData['image'] = $filename;
+            // $validatedData['image'] = $filename;
+            $validatedData['image'] = $originalPath;
         } else {
             $validatedData['image'] = $request->oldImage;
         }
