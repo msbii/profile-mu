@@ -70,7 +70,7 @@ class DashboardPostController extends Controller
         $validateData = $request->validate([
             'title' => 'required|max:255',
             'slug' => 'required|unique:posts',
-            'image' => 'nullable|image|file|max:1024',
+            'image' => 'nullable|image|file|max:2048',
             'category_id' => 'required',
             'body' => 'required'
         ]);
@@ -245,9 +245,9 @@ class DashboardPostController extends Controller
             $image->save($thumbnailFullPath);
 
             // Simpan nama file saja (atau path tergantung pilihan sebelumnya)
-            $validatedData['image'] = $filename;
+            $validateData['image'] = $filename;
         } else {
-            $validatedData['image'] = $request->oldImage;
+            $validateData['image'] = $request->oldImage;
         }
 
         // if ($request->file('image')) {
