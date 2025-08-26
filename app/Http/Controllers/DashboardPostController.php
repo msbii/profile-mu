@@ -6,7 +6,9 @@ use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Intervention\Image\Image;
 use Illuminate\Support\Facades\Storage;
+
 use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 class DashboardPostController extends Controller
@@ -75,9 +77,9 @@ class DashboardPostController extends Controller
             'body' => 'required'
         ]);
         // check jika img tidak ada maka unsplash
-        if ($request->file('image')) {
-            $validateData['image'] = $request->file('image')->store('post-images','public');
-        }
+        // if ($request->file('image')) {
+        //     $validateData['image'] = $request->file('image')->store('post-images','public');
+        // }
 
         // Simpan file gambar
         // if ($request->file('image')) {
@@ -85,6 +87,28 @@ class DashboardPostController extends Controller
         //     // Hapus 'public/' agar yang disimpan hanya 'post-images/namafile.png'
         //     $validateData['image'] = str_replace('public/', '', $path);
         // }
+
+        if ($request->file('image')) {
+        // Simpan file asli
+        $originalPath = $request->file('image')->store('post-images/original', 'public');
+        $filename = basename($originalPath); // ambil nama file saja
+
+        // Buat thumbnail (300x300 misalnya)
+        $thumbnailPath = 'post-images/thumbnail/' . $filename;
+        $thumbnailFullPath = storage_path('app/public/' . $thumbnailPath);
+
+        // Pastikan folder thumbnail ada
+        if (!file_exists(dirname($thumbnailFullPath))) {
+            mkdir(dirname($thumbnailFullPath), 0777, true);
+        }
+
+        // Resize dengan Intervention Image
+        $image = Image::make($request->file('image'))->fit(300, 300);
+        $image->save($thumbnailFullPath);
+
+        // Simpan hanya nama file atau path relatif di DB
+        $validateData['image'] = $filename;
+    }
 
         // Menyimpan data ke dalamm post
         $validateData['user_id'] = auth()->user()->id;
