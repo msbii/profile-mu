@@ -136,7 +136,7 @@
                                                     <a href="/posts/{{ $popularPosts[0]->slug }}">
                                                         @if ($popularPosts[0]->image)
                                                         <div class="d-flex justify-content-center">
-                                                            <img src="{{ asset('storage/post-images/thumbnail/' . $popularPosts[0]->image) }}" width="190" height="150" class="img-fluid" alt="{{ $popularPosts[0]->category->name }}">
+                                                            <img src="{{ asset('storage/post-images/thumbnail/' . $popularPosts[0]->image) }}"  class="img-fluid" alt="{{ $popularPosts[0]->category->name }}">
                                                         </div>
                                                         @else
                                                         <div class="d-flex justify-content-center">
