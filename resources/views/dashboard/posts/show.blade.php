@@ -21,7 +21,7 @@
                     @if ($post->image)
                     <div style="max-height: 400px; overflow:hidden;">
 
-                        <img src="{{ asset('storage/'.$post->image) }}" class="card-img-top mt-3" alt="{{ $post->category->name }}">
+                        <img src="{{ asset('storage/post-images/original/'.$post->image) }}" class="card-img-top mt-3" alt="{{ $post->category->name }}">
                     </div>
                     @else
 

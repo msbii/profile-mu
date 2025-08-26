@@ -54,7 +54,7 @@
           {{-- tampilan old data foto --}}
           @if ($post->image)
               
-          <img src="{{ asset('storage/' . $post->image) }}" alt="" class="img-preview img-fluid mb-3 col-sm-2 d-block">
+          <img src="{{ asset('storage/post-images/thumbnail/'.basename($post->image)) }}" alt="" class="img-preview img-fluid mb-3 col-sm-2 d-block">
           @else
           <img src="" alt="" class="img-preview img-fluid mb-3 col-sm-2">
           @endif
