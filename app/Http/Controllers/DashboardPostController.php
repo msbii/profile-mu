@@ -6,7 +6,7 @@ use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Intervention\Image\Facades\Image;
+use Intervention\Image\Laravel\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 
 use \Cviebrock\EloquentSluggable\Services\SlugService;
@@ -89,26 +89,27 @@ class DashboardPostController extends Controller
         // }
 
         if ($request->file('image')) {
-        // Simpan file asli
-        $originalPath = $request->file('image')->store('post-images/original', 'public');
-        $filename = basename($originalPath); // ambil nama file saja
+            // Simpan file asli
+            $originalPath = $request->file('image')->store('post-images/original', 'public');
+            $filename = basename($originalPath);
 
-        // Buat thumbnail (300x300 misalnya)
-        $thumbnailPath = 'post-images/thumbnail/' . $filename;
-        $thumbnailFullPath = storage_path('app/public/' . $thumbnailPath);
+            // Path thumbnail
+            $thumbnailPath = 'post-images/thumbnail/' . $filename;
+            $thumbnailFullPath = storage_path('app/public/' . $thumbnailPath);
 
-        // Pastikan folder thumbnail ada
-        if (!file_exists(dirname($thumbnailFullPath))) {
-            mkdir(dirname($thumbnailFullPath), 0777, true);
+            // Pastikan folder thumbnail ada
+            if (!file_exists(dirname($thumbnailFullPath))) {
+                mkdir(dirname($thumbnailFullPath), 0777, true);
+            }
+
+            // Resize dengan Intervention Image v3
+            $image = Image::read($request->file('image'))
+                ->cover(300, 300); // cover = crop & resize agar pas
+            $image->save($thumbnailFullPath);
+
+            // Simpan path relatif (misalnya untuk ditampilkan dengan asset('storage/...'))
+            $validateData['image'] = $filename;
         }
-
-        // Resize dengan Intervention Image
-        $image = Image::make($request->file('image'))->fit(300, 300);
-        $image->save($thumbnailFullPath);
-
-        // Simpan hanya nama file atau path relatif di DB
-        $validateData['image'] = $filename;
-    }
 
         // Menyimpan data ke dalamm post
         $validateData['user_id'] = auth()->user()->id;
