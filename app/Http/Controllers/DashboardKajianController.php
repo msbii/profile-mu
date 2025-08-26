@@ -82,7 +82,7 @@ class DashboardKajianController extends Controller
             $thumbnail->save($thumbnailFullPath);
 
             // Simpan path relatif ke database (bisa pilih salah satu: original atau thumbnail)
-            $validateData['image'] = $originalPath;
+            $validateData['image'] = $filename;
         } else {
             // Jika tidak ada gambar, bisa kasih default
             $validateData['image'] = null;

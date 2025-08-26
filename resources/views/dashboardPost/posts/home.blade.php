@@ -250,7 +250,7 @@
                                     </figure>
                                     <div class="right-content">
                                         <div class="content">
-                                            <h3><a href="/posts/{{ $post->slug }}">{{ $post->title }}</a></h3>
+                                            <h3><a href="/kajian/{{ $post->slug }}">{{ $post->title }}</a></h3>
                                             <small class="text-muted">{{ $post->created_at->format('d M y') }}</small>
                                         </div>
                                     </div>
