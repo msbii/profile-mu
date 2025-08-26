@@ -161,7 +161,7 @@
                                                     <a href="/posts/{{ $popularKajians[0]->slug }}">
                                                         @if ($popularKajians[0]->image)
                                                         <div class="d-flex justify-content-center">
-                                                            <img src="{{ asset('storage/post-images/thumbnail/' . $popularKajians[0]->image) }}" class="img-fluid" alt="{{ $popularKajians[0]->kategoriKajian->name }}">
+                                                            <img src="{{ asset('storage/post-images/thumbnail/' . $popularKajians[0]->image) }}" width="190" height="150" class="img-fluid" alt="{{ $popularKajians[0]->kategoriKajian->name }}">
                                                         </div>
                                                         @else
                                                         <div class="d-flex justify-content-center">
