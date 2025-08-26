@@ -67,29 +67,16 @@ class DashboardPostController extends Controller
      */
     public function store(Request $request)
     {
-        // return $request->file('image')->store('post-images');
-
         $validateData = $request->validate([
             'title' => 'required|max:255',
             'slug' => 'required|unique:posts',
-            'image' => 'image|file|max:1024',
+            'image' => 'nullable|image|file|max:1024',
             'category_id' => 'required',
             'body' => 'required'
         ]);
-        // check jika img tidak ada maka unsplash
-        // if ($request->file('image')) {
-        //     $validateData['image'] = $request->file('image')->store('post-images','public');
-        // }
 
-        // Simpan file gambar
-        // if ($request->file('image')) {
-        //     $path = $request->file('image')->store('public/post-images');
-        //     // Hapus 'public/' agar yang disimpan hanya 'post-images/namafile.png'
-        //     $validateData['image'] = str_replace('public/', '', $path);
-        // }
-
-        if ($request->file('image')) {
-            // Simpan file asli
+        if ($request->hasFile('image')) {
+            // Simpan original
             $originalPath = $request->file('image')->store('post-images/original', 'public');
             $filename = basename($originalPath);
 
@@ -97,29 +84,87 @@ class DashboardPostController extends Controller
             $thumbnailPath = 'post-images/thumbnail/' . $filename;
             $thumbnailFullPath = storage_path('app/public/' . $thumbnailPath);
 
-            // Pastikan folder thumbnail ada
+            // Pastikan folder ada
             if (!file_exists(dirname($thumbnailFullPath))) {
                 mkdir(dirname($thumbnailFullPath), 0777, true);
             }
 
             // Resize dengan Intervention Image v3
-            $image = Image::read($request->file('image'))
-                ->cover(300, 300); // cover = crop & resize agar pas
-            $image->save($thumbnailFullPath);
+            $thumbnail = Image::read($request->file('image'))
+                ->cover(300, 300); // crop & resize agar pas
 
-            // Simpan path relatif (misalnya untuk ditampilkan dengan asset('storage/...'))
-            $validateData['image'] = $filename;
+            $thumbnail->save($thumbnailFullPath);
+
+            // Simpan path relatif ke database (bisa pilih salah satu: original atau thumbnail)
+            $validateData['image'] = $originalPath;
+        } else {
+            // Jika tidak ada gambar, bisa kasih default
+            $validateData['image'] = null;
         }
 
-        // Menyimpan data ke dalamm post
         $validateData['user_id'] = auth()->user()->id;
         $validateData['excerpt'] = Str::limit(strip_tags($request->body), 200);
 
         Post::create($validateData);
 
-        // return redirect('/dashboard/posts')->with('success', 'New post has been addes!');
         return redirect('/dashboard/posts')->with('success', 'Postingan baru telah ditambahkan!');
     }
+
+    // public function store(Request $request)
+    // {
+    //     // return $request->file('image')->store('post-images');
+
+    //     $validateData = $request->validate([
+    //         'title' => 'required|max:255',
+    //         'slug' => 'required|unique:posts',
+    //         'image' => 'image|file|max:1024',
+    //         'category_id' => 'required',
+    //         'body' => 'required'
+    //     ]);
+    //     // check jika img tidak ada maka unsplash
+    //     // if ($request->file('image')) {
+    //     //     $validateData['image'] = $request->file('image')->store('post-images','public');
+    //     // }
+
+    //     // Simpan file gambar
+    //     // if ($request->file('image')) {
+    //     //     $path = $request->file('image')->store('public/post-images');
+    //     //     // Hapus 'public/' agar yang disimpan hanya 'post-images/namafile.png'
+    //     //     $validateData['image'] = str_replace('public/', '', $path);
+    //     // }
+
+    //     if ($request->file('image')) {
+    //         // Simpan file asli
+    //         $originalPath = $request->file('image')->store('post-images/original', 'public');
+    //         $filename = basename($originalPath);
+
+    //         // Path thumbnail
+    //         $thumbnailPath = 'post-images/thumbnail/' . $filename;
+    //         $thumbnailFullPath = storage_path('app/public/' . $thumbnailPath);
+
+    //         // Pastikan folder thumbnail ada
+    //         if (!file_exists(dirname($thumbnailFullPath))) {
+    //             mkdir(dirname($thumbnailFullPath), 0777, true);
+    //         }
+
+    //         // Resize dengan Intervention Image v3
+    //         $image = Image::read($request->file('image'))
+    //             ->cover(300, 300); // cover = crop & resize agar pas
+    //         $image->save($thumbnailFullPath);
+
+    //         // Simpan path relatif (misalnya untuk ditampilkan dengan asset('storage/...'))
+    //         $validateData['image'] = $filename;
+    //     }
+
+    //     // Menyimpan data ke dalamm post
+    //     $validateData['user_id'] = auth()->user()->id;
+    //     $validateData['excerpt'] = Str::limit(strip_tags($request->body), 200);
+
+    //     Post::create($validateData);
+
+    //     // return redirect('/dashboard/posts')->with('success', 'New post has been addes!');
+    //     return redirect('/dashboard/posts')->with('success', 'Postingan baru telah ditambahkan!');
+    // }
 
     /**
      * Display the specified resource.
