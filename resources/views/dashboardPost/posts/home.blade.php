@@ -51,7 +51,9 @@
                                     <figure class="image-box">
                                         {{-- pengecekan gambar kosong atau ada --}}
                                         @if ($post->image)
-                                            <img src="{{ asset('storage/' . $post->image) }}" width="370" height="250" class="card-img-top" alt="{{ $post->title }}">
+                                            {{-- <img src="{{ asset('storage/' . $post->image) }}" width="370" height="250" class="card-img-top" alt="{{ $post->title }}"> --}}
+                                            <img src="{{ asset('storage/post-images/thumbnail/'.basename($post->image)) }}" alt="">
+
                                         @else
                                             {{-- <img src="https://storage.googleapis.com/a1aa/image/fYtaLxmXcWwZE6OgwpSCiZjC55SLkvIj3QQshe5WZGwAookTA.jpg" width="370" height="250" class="card-img-top" alt="{{ $kajian[0]->title }}"> --}}
                                             <img src="https://storage.googleapis.com/a1aa/image/fYtaLxmXcWwZE6OgwpSCiZjC55SLkvIj3QQshe5WZGwAookTA.jpg" width="370" height="250" class="card-img-top" alt="{{ $post->title }}">
